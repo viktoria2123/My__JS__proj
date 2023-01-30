@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="main">
+        <div class="container">
+            <h2> Game of Trones</h2>
+            <div class="btn-row">
+
+            </div>
+            <nav>
+                <select class="select" name="" id="">
+
+                </select>
+            </nav>
+
+            <div class="main__row">
+
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+
+        const out = document.querySelector('.main__row')
+        const select = document.querySelector('.select')
+        const btnout = document.querySelector('.btn-row')
+
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': '6a018dc007msh368fcd7501d0c79p10af9bjsnadcd99bf3958',
+                'X-RapidAPI-Host': 'game-of-thrones1.p.rapidapi.com'
+            }
+        };
+
+        fetch('https://game-of-thrones1.p.rapidapi.com/Characters/?rapidapi-key=6a018dc007msh368fcd7501d0c79p10af9bjsnadcd99bf3958')
+            .then(data => data.json())
+            .then(data => console.log(data))
+            .catch(err => console.log('Error: ' + err));
+
+
+
+
+
+        function creatItem(item) {
+            let mainItem = document.createElement('div');
+            let mainName = document.createElement('h2');
+            let mainImg = document.createElement('img');
+            let mainTitle = document.createElement('p');
+            let mainFamily = document.createElement('p');
+
+            mainItem.classList.add('main__item');
+            mainName.classList.add('main__name');
+            mainImg.classList.add('main__img');
+            mainTitle.classList.add('main__text');
+            mainFamily.classList.add('main__text');
+
+            mainName.innerText = item.fullName;
+            mainImg.setAttribute('src', item.image);
+            mainTitle.innerHTML = `Title: <b>${item.title}</b>`;
+            mainFamily.innerHTML = `Family: <b>${item.family}</b>`;
+
+            mainItem.append(mainName, mainImg, mainTitle, mainFamily);
+
+            return mainItem
+
+
+        }
+
+
+        function showAll() {
+            data.forEach((item) => {
+                out.append(addItem(item))
+            })
+        }
+        showAll()
+
+        function creatSelect(selItem) {
+            let newArr = [];
+            select.innerHTML = '';
+            selItem.map((item) => {
+                newArr.push(item.fullName);
+            })
+
+            let newArr2 = new Set(newArr);
+
+            newArr2.forEach((item) => {
+                selOption = document.createElement('option');
+                selOption.setAttribute('value', item);
+                selOption.innerText = item;
+                select.append(selOption);
+                // select.innerHTML += `<option value='${item}'>${item}</option>`
+
+            })
+            //  newArr2 = [];
+
+        }
+       
+
+    </script>
+</body>
+
+</html>
