@@ -34,17 +34,11 @@
         const select = document.querySelector('.select')
         const btnout = document.querySelector('.btn-row')
 
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': '6a018dc007msh368fcd7501d0c79p10af9bjsnadcd99bf3958',
-                'X-RapidAPI-Host': 'game-of-thrones1.p.rapidapi.com'
-            }
-        };
+
 
         fetch('https://game-of-thrones1.p.rapidapi.com/Characters/?rapidapi-key=6a018dc007msh368fcd7501d0c79p10af9bjsnadcd99bf3958')
             .then(data => data.json())
-            .then(data => console.log(data))
+            .then(data => { showAll(data) })
             .catch(err => console.log('Error: ' + err));
 
 
@@ -65,7 +59,7 @@
             mainFamily.classList.add('main__text');
 
             mainName.innerText = item.fullName;
-            mainImg.setAttribute('src', item.image);
+            mainImg.setAttribute('src', item.imageUrl);
             mainTitle.innerHTML = `Title: <b>${item.title}</b>`;
             mainFamily.innerHTML = `Family: <b>${item.family}</b>`;
 
@@ -77,34 +71,17 @@
         }
 
 
-        function showAll() {
-            data.forEach((item) => {
-                out.append(addItem(item))
+        function showAll(arr) {
+            console.log(arr);
+            arr.forEach((item) => {
+                console.log(item);
+                out.append(creatItem(item))
             })
         }
         showAll()
 
-        function creatSelect(selItem) {
-            let newArr = [];
-            select.innerHTML = '';
-            selItem.map((item) => {
-                newArr.push(item.fullName);
-            })
 
-            let newArr2 = new Set(newArr);
 
-            newArr2.forEach((item) => {
-                selOption = document.createElement('option');
-                selOption.setAttribute('value', item);
-                selOption.innerText = item;
-                select.append(selOption);
-                // select.innerHTML += `<option value='${item}'>${item}</option>`
-
-            })
-            //  newArr2 = [];
-
-        }
-       
 
     </script>
 </body>
