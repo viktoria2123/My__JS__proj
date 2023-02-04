@@ -11,7 +11,7 @@
 <body>
     <section class="main">
         <div class="container">
-            <h2> Game of Trones</h2>
+            <h1> Game of Trones</h1>
             <div class="btn-row">
 
             </div>
@@ -21,6 +21,12 @@
                 </select>
             </nav>
 
+            <div class="serch">
+
+                <input class="inp1" type="text">
+
+            </div>
+
             <div class="main__row">
 
             </div>
@@ -28,11 +34,70 @@
     </section>
 
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 0 20px;
+            margin: 0 auto;
+
+        }
+
+        .select {
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .main__row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        .main__item {
+            padding: 16px;
+            border: 1px solid blue;
+            border-radius: 15px;
+        }
+
+        .main__img {
+            display: block;
+            width: 100%;
+        }
+
+        .btn-row {
+            margin: 16px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn {
+            display: block;
+            background-color: blueviolet;
+            color: #fff;
+            min-width: 40px;
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
+
     <script>
 
         const out = document.querySelector('.main__row')
         const select = document.querySelector('.select')
         const btnout = document.querySelector('.btn-row')
+        const serch = document.querySelector('.inp1');
 
 
 
@@ -81,6 +146,55 @@
         showAll()
 
 
+        function creatSelect(selItem) {
+            let newArr = [];
+            select.innerHTML = '';
+            selItem.map((item) => {
+                newArr.push(item.family);
+            })
+
+            let newArr2 = new Set(newArr);
+
+            newArr2.forEach((item) => {
+                selOption = document.createElement('option');
+                selOption.setAttribute('value', item);
+                selOption.innerText = item;
+                select.append(selOption);
+                // select.innerHTML += `<option value='${item}'>${item}</option>`
+
+            })
+            //  newArr2 = [];
+
+        }
+
+        createSelect()
+
+
+        // Пошук по імені
+        function searchName(arr, val) {
+            let newArr = [];
+
+            arr.map((item) => {
+                let lowItemName = item.fullName.toLowerCase();
+                let lowItemValue = val.toLowerCase();
+                //item.name         //serch.value
+                if (lowItemName.indexOf(lowItemValue) >= 0) {
+                    newArr.push(item)
+                }
+            })
+
+            return newArr
+        }
+
+          // Пошук по імені і співпадінню
+          serch.addEventListener('keyup', () => {
+            out.innerHTML = ``;
+            let pers = searchName(arr, serch.value);
+            pers.forEach((item) => {
+                let newPers = creatCart(item)
+                out.append(newPers)
+            })
+        })
 
 
     </script>
