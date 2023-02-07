@@ -22,10 +22,20 @@ body {
 
 h1 {
     font-size: 125px;
+    text-align: center;
 }
 
-h2, p {
-    color:rgb(220, 161, 11);
+/* Mobile size */
+@media (max-width: 576px) {
+    h1 {
+        font-size: 75px;
+
+    }
+}
+
+h2,
+p {
+    color: rgb(220, 161, 11);
     padding: 20px 0 10px;
 }
 
@@ -78,12 +88,22 @@ h2, p {
     margin-top: 20px;
 }
 
+/* Mobile size */
+@media (max-width: 576px) {
+    .main__row {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+}
+
+
 .main__item {
     padding: 16px;
     border: 1px solid rgb(0, 0, 0);
     border-radius: 15px;
-    height: fit-content;
+    /* height: fit-content; */
 }
+
 
 .main__img {
     display: block;
